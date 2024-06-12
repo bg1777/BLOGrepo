@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.toast-container {
+  display: flex;
+  flex-direction: column-reverse; /* New toasts appear on top */
+  align-items: center;
+  gap: 0.5rem; /* Adjust the spacing between toasts as needed */
+  position: fixed;
+  top: 1rem; /* Adjust this value to move the toasts upwards */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50; /* Ensure it's above other content */
+}
+
+.toast {
+  animation: slide-in 0.5s ease-out;
+}
+
+.success-toast {
+  animation: slide-in-right 0.5s ease-out forwards;
+}
+
+.success-toast.fade-out {
+  animation: fade-out 0.5s ease-out forwards;
+}
